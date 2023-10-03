@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap');
+
+body{
+  transition: all 0.8s;
+  font-family: "League Spartan", sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.titleBox {
+  width: fit-content;
+  margin:auto;
+  display: flex;
+}
+
+.websiteLogo {
+  width: 17.5em;
+  margin: 0 0 0 0 ;
+  transition: all 0.3s;
+  cursor:pointer;
+}
+
+.websiteLogo:hover {
+  width: 18em;
+  transition: all 0.3s;
+}
+
+.supremeFormContainer{
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: auto;
+}
+
+.formTitle{
+  padding: 0;
+  margin: 0 0 0.1em 0;
+  text-align: right;
+  transition: 0.5s;
+}
+
+.formTitle.light{
+  color: #21282E;
+}
+
+.formTitle.dark{
+  color: white;
+}
+
+.formContainer{
+  width:17em;
+  border-radius: 1em;
+  display:flex;
+  flex-direction: column;
+  padding:2em;
+  align-items: center;
+  margin:0 auto 2em auto;}
+
+.formContainer.light{
+  background-color: #FF7A00;
+}
+
+.formContainer.dark{
+  background-color: rgb(90, 96, 100);
+}
+
+.inputText {
+  font-family: "League Spartan", sans-serif;
+  font-weight: 700;
+  font-size: 1.2em;
+  margin:0.2em 0 0.2em 0;
+  color:white;
+  text-shadow: 0 0 0.2em rgba(0, 0, 0, 0.3);
+}
+
+.inputField {
+  font-family: "League Spartan", sans-serif;
+  font-weight: 400;
+  border:transparent;
+  border-radius: 0.2em;
+  font-size: 1.2em;
+  margin:0 0 0.7em 0;
+  padding:0.4em 0.3em 0.3em 0.3em;
+  width:85%;
+}
+
+.inputField:focus {
+  outline:none;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+}
+
+.mainButton {
+  font-family: "League Spartan", sans-serif;
+  font-weight: 700;
+  border-radius: 0.2em;
+  border: 0.1em solid transparent;
+  font-size: 1.2em;
+  padding:0.4em 1em 0.4em 1em;
+  color:white;
+  text-align: center;
+  width:fit-content;
+  cursor: pointer;
+  transition: 0.5s;
+  margin: 0.7em 0 0.5em 0;
+  text-shadow: 0 0 0.3em rgba(0,0,0,0.3);
+}
+
+.mainButton.light {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.mainButton.dark {
+  background-color: #FF7A00;
+}
+
+.mainButton:hover{
+  background-color: rgba(0, 0, 0, 0.5);
+  padding:0.4em 1.2em 0.4em 1.2em;
+  transition: 0.5s;
+  box-shadow: 0 0 0.6em rgba(0, 0, 0, 0.4);
+}
+
+.mainButton:disabled {
+  cursor: not-allowed;
+}
+
+.uploadImageButton {
+  cursor: pointer;
+  border-radius: 0.2em;
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:-0.2em 0 0 0.7em;
+  height:1em;
+  width:2.3em;
+  padding: 0.2em;
+}
+
+.uploadImageButton.light {
+  background-color: rgba(0,0,0,0.2);
+}
+
+.uploadImageButton.dark {
+  background-color: #FF7A00;
+}
+
+.uploadImageButton:hover {
+  width:2.5em;
+  box-shadow: 0 0 0.4em rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.imageContainer{
+  width:80%;
+  height:8em;
+  margin-bottom:0em;
+  border: 0.2em solid white;
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  display:flex;
+  justify-content: right;
+}
+
+.closeButton {
+  position:relative;
+  width: 1em;
+  height: 1em;
+  cursor: pointer;
+  margin-top:-0.5em;
+  margin-right:-0.5em;
+  transition: 0.3s;
+}
+
+.closeButton:hover {
+  width:1.1em;
+  transition: 0.3s;
+}
+
+.notShow{
+  display:none;
+}
+
+.corner {
+  width:9em;
+  position: fixed;
+  z-index: -1;
+}
+
+.corner.left {
+  bottom:0;
+  left:0;
+}
+
+.corner.right {
+  top:0;
+  right:0;
+  transform: rotate(180deg);
+}
+
+.profilePhotoOption{
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.1em;
+}
+
+.uploadIcon{
+  height:100%;
+}
+
+
+.themeButtonsContainer {
+  position: relative;
+  display: flex;
+  width:85%;
+  margin-bottom: 1em;
+}
+
+.themeFocuser {
+  position: absolute;
+  border-radius: 0.8em;
+  width: 2.4em;
+  height: 2.4em;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1;
+  transition: 1s;
+  margin-top:-0.1em;
+}
+
+.themeFocuser.selectedLeft {
+  margin-left:-0.5em;
+  background-image: url('assets/icons/sunIcon.png');
+  transition: 1s;
+  transform: rotate(40deg);
+}
+
+.themeFocuser.selectedRight {
+  background-image: url('assets/icons/moonIcon.png');
+  margin-left:12.9em;
+  transition: 1s;
+  transform: rotate(180deg);
+}
+
+.themeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4em;
+  position: static;
+  font-family: "League Spartan", sans-serif;
+  font-weight: 700;
+  font-size: 1.2em;
+  color:white;
+  width:100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.4em;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.themeButton:hover{
+  transition: 0.5s;
+  background-color: rgba(53, 53, 53, 0.355);
+}
+
+.goToLoginLink{
+  text-decoration: none;
+  color: #64380F;
+  transition: 0.5s;
+}
+
+.goToLoginLink.light{
+  color: #64380F;
+  text-shadow: none;
+}
+
+.goToLoginLink.dark{
+  color: #FF7A00;
+}
+
+.goToLoginLink:hover{
+  text-decoration: underline;
+  transition: 0.5s;
+}
