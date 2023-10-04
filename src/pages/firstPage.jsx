@@ -8,7 +8,7 @@ function FirstPage() {
     
     return (
         <NavLink to="/register">
-            <div className={"formContainer " + (theme === "light" ? "light" : "dark")}>
+            <div className={"bigButton " + (theme === "light" ? "light" : "dark")}>
                 comenzar
             </div>
         </NavLink>

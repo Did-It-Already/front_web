@@ -129,9 +129,9 @@ function Register() {
         <input onChange={getPasswordAgain} className="inputField" type="password" style={s} required></input>
               
         <p className="inputText">tema</p>
-        <div className="themeButtonsContainer">
+        <div className="themeButtonsContainer" onClick={()=>setTheme(theme === "light" ? "dark": "light")}>
             <div className={"themeFocuser " + (theme === "light" ? "selectedLeft" : "selectedRight")}></div>   
-            <div className="themeButton" onClick={()=>setTheme(theme === "light" ? "dark": "light")}>
+            <div className="themeButton">
                 {theme === "light" ? "claro" : "oscuro"}
             </div>
         </div>

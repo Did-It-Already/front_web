@@ -6,13 +6,14 @@ body{
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 .titleBox {
   width: fit-content;
   margin:auto;
   display: flex;
+  margin-top: 35vh;
 }
 
 .websiteLogo {
@@ -56,7 +57,8 @@ body{
   flex-direction: column;
   padding:2em;
   align-items: center;
-  margin:0 auto 2em auto;}
+  margin:0 auto 2em auto;
+}
 
 .formContainer.light{
   background-color: #FF7A00;
@@ -64,6 +66,16 @@ body{
 
 .formContainer.dark{
   background-color: rgb(90, 96, 100);
+}
+
+.bigButton{
+  width:17em;
+  border-radius: 1em;
+  display:flex;
+  flex-direction: column;
+  padding:2em;
+  align-items: center;
+  margin:0 auto 2em auto;
 }
 
 .inputText {
@@ -219,6 +231,7 @@ body{
   display: flex;
   width:85%;
   margin-bottom: 1em;
+  cursor: pointer;
 }
 
 .themeFocuser {
@@ -231,7 +244,7 @@ body{
   background-position: center;
   z-index: 1;
   transition: 1s;
-  margin-top:-0.1em;
+  margin-top:-0.15em;
 }
 
 .themeFocuser.selectedLeft {
@@ -261,7 +274,6 @@ body{
   width:100%;
   background-color: rgba(0, 0, 0, 0.2);
   padding: 0.4em;
-  cursor: pointer;
   transition: 0.5s;
 }
 
