@@ -9,7 +9,6 @@ import Login from './pages/login.jsx';
 
 import corner from "./assets/images/corner.png";
 
-
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') === null ? "light": localStorage.getItem('theme'));
 

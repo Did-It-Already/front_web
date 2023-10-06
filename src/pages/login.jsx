@@ -1,4 +1,4 @@
-import { useState , useContext} from "react";
+import { useState , useContext, useEffect} from "react";
 import MyContext from '../context.js';
 import { NavLink } from "react-router-dom";
 
@@ -8,6 +8,13 @@ function Login() {
     const [password, setPassword] = useState("");
 
     const {theme} = useContext(MyContext)
+
+    useEffect(()=>{
+        var element = document.getElementById('titleBoxId')
+        if(element.className === 'titleBox'){
+            element.classList.add("normal")
+        }
+    }, [])
 
     // Updates fields when they change
     const getEmail = (event) => {

@@ -1,4 +1,4 @@
-import { useState , useContext} from "react";
+import { useState , useContext,useEffect} from "react";
 import closeIcon from "../assets/icons/closeIcon.png";
 import uploadIcon from "../assets/icons/uploadIcon.png";
 import MyContext from '../context.js';
@@ -14,6 +14,13 @@ function Register() {
     const [passwordAgain, setPasswordAgain] = useState("");
 
     const {theme, setTheme} = useContext(MyContext)
+
+    useEffect(()=>{
+        var element = document.getElementById('titleBoxId')
+        if(element.className === 'titleBox'){
+            element.classList.add("normal")
+        }
+    }, [])
 
     // Updates all fields when they change
     const getName = (event) => {
