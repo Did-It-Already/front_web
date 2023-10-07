@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+
 import MyContext from '../context.js';
 
 function FirstPage() {
-
     const {theme} = useContext(MyContext)
 
     useEffect(()=>{

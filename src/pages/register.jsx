@@ -1,8 +1,10 @@
 import { useState , useContext,useEffect} from "react";
+import { NavLink } from "react-router-dom";
+
+import MyContext from '../context.js';
+
 import closeIcon from "../assets/icons/closeIcon.png";
 import uploadIcon from "../assets/icons/uploadIcon.png";
-import MyContext from '../context.js';
-import { NavLink } from "react-router-dom";
 
 function Register() {
 

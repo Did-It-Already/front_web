@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
+
 import MyContext from '../context.js';
+
 import { days, months } from "../assets/constants.js";
 
 function CalendarSection() {

@@ -1,8 +1,8 @@
-import TasksSection from "../components/TasksSection.jsx";
 import UserSection from "../components/UserSection.jsx";
+import CalendarSection from "../components/CalendarSection.jsx";
+import TasksSection from "../components/TasksSection.jsx";
 
 import {tasks, habits, user} from '../assets/constants.js'
-import CalendarSection from "../components/CalendarSection.jsx";
 
 function mainPage() {
     return (

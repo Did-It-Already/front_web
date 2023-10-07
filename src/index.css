@@ -355,6 +355,11 @@ h1{
 .taskMainContainer{
   display: flex;
   align-items: center;
+  flex-direction: row;
+}
+
+.taskCheckboxContainer {
+  margin-right: 0.8em;
 }
 
 .taskCheckbox{
@@ -369,7 +374,6 @@ h1{
   font-family: "League Spartan", sans-serif;
   font-weight: 700;
   font-size: 1em;
-  margin-right:0.8em;
   cursor: pointer;
   transition: 0.5s;
 }
@@ -387,6 +391,10 @@ h1{
 .taskCheckbox.light{
   border-color: white;
   color:white;
+}
+
+.taskTextContainer{
+  margin-right:0.8em;
 }
 
 .taskEditButton{
@@ -423,10 +431,6 @@ h1{
 .taskCardDate{
   padding: 0;
   margin:0.7em 0 -0.2em 0;
-}
-
-.taskTextContainer{
-  margin-right:0.8em;
 }
 
 .sectionContainer{
@@ -634,7 +638,6 @@ h1{
   justify-content: center;
   margin:0;
   position: relative;
-  color:white;
 }
 
 .calendarSectionContainer.light{

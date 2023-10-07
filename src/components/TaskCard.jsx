@@ -8,8 +8,10 @@ function TaskCard({task, isHabit}) {
     <div className={"taskCard " + (task.is_done  ? "dark" : "light")}>
 
       <div className="taskMainContainer">
-        <div className={"taskCheckbox " + (task.is_done  ? "light" : "dark")} onClick={()=>{}}>
-          {task.is_done  ? "✓" : ""}
+        <div className="taskCheckboxContainer">
+          <div className={"taskCheckbox " + (task.is_done  ? "light" : "dark")} onClick={()=>{}}>
+            {task.is_done  ? "✓" : ""}
+          </div>
         </div>
         <div className="taskTextContainer">
           <p className="taskCardTitle">
