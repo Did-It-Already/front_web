@@ -6,6 +6,7 @@ import Header from "./components/Header.jsx"
 import FirstPage from './pages/firstPage.jsx';
 import Register from './pages/register.jsx';
 import Login from './pages/login.jsx';
+import MainPage from './pages/mainPage.jsx';
 
 import corner from "./assets/images/corner.png";
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/" element={<FirstPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/main" element={<MainPage />} />
         </Routes>
       </Router>
     </MyContext.Provider>

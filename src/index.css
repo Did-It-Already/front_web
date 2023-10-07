@@ -9,6 +9,10 @@ body{
   height: 100%;
 }
 
+h1{
+  font-size: 1.8em;
+}
+
 .titleBox {
   width: fit-content;
   margin:auto;
@@ -226,7 +230,7 @@ body{
 .corner {
   width:9em;
   position: fixed;
-  z-index: -1;
+  z-index: -10;
 }
 
 .corner.left {
@@ -326,3 +330,380 @@ body{
   text-decoration: underline;
   transition: 0.5s;
 }
+
+.taskCard{
+  padding: 1em;
+  font-family: "League Spartan", sans-serif;
+  border-radius: 0.4em;
+  width:85%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 0.3em 0;
+}
+
+.taskCard.light{
+  background-color: rgba(255,255,255,0.6);
+  color: black;
+}
+
+.taskCard.dark{
+  background-color: rgba(0,0,0,0.35);
+  color: white;
+}
+
+.taskMainContainer{
+  display: flex;
+  align-items: center;
+}
+
+.taskCheckbox{
+  border-radius: 0.3em;
+  min-width: 1em;
+  width: 1em;
+  height:1em;
+  border: 0.2em solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "League Spartan", sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  margin-right:0.8em;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.taskCheckbox:hover{
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: 0.5s;
+}
+
+.taskCheckbox.dark{
+  border-color: black;
+  color:black;
+}
+
+.taskCheckbox.light{
+  border-color: white;
+  color:white;
+}
+
+.taskEditButton{
+  padding:0.3em;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.taskEditButton:hover{
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: 0.5s;
+}
+
+.taskEditIcon{
+  width:1.7em;
+}
+
+.taskCardTitle{
+  padding: 0;
+  font-weight: 700;
+  font-size: 1.2em;
+  margin:0 0 -0.1em 0;
+}
+
+.taskCardDescription{
+  padding: 0;
+  margin:0 0 0 0;
+}
+
+.taskCardDate{
+  padding: 0;
+  margin:0.7em 0 -0.2em 0;
+}
+
+.taskTextContainer{
+  margin-right:0.8em;
+}
+
+.sectionContainer{
+  width:16em;
+  height:30em;
+  border-radius: 1em;
+  display:flex;
+  flex-direction: column;
+  padding:1em;
+  align-items: center;
+  margin:0;
+  position: relative;
+}
+
+.sectionContainer.light{
+  background-color: rgb(90, 96, 100);
+}
+
+.sectionContainer.dark{
+  background-color: #FF7A00;
+}
+
+.sectionTitle{
+  color:white;
+  padding: 0;
+  margin: 0.2em 0 0.5em 0;
+  text-align: right;
+  text-shadow: 0 0 0.2em rgba(0, 0, 0, 0.4);
+}
+
+.sectionText{
+  color:white;
+  margin: 1em 0 0.5em 0;
+  text-align: center;
+  font-weight: 700;
+}
+
+.noTasksText{
+  width: 100%;
+  height:100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color:white;
+  font-weight: 700;
+}
+
+.addTaskButton{
+  width:0.8em;
+  height:0.8em;
+  background-color: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 2em;
+  padding:0.2em 0.1em 0 0.1em;
+  border-radius: 0.2em;
+  margin:0;
+  position: absolute;
+  top:0.6em;
+  right:0.6em;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.addTaskButton.light{
+  background-color: white;
+  color: black;
+}
+
+.addTaskButton.dark{
+  background-color: rgba(0,0,0,0.35);
+  color:white;
+}
+
+.addTaskButton:hover{
+  width:1em;
+  transition: 0.5s;
+  box-shadow: 0 0 0.15em rgba(0, 0, 0, 0.4);
+}
+
+.tasksContainer{
+  height: 25em;
+  overflow-y: auto;
+  overflow-x:hidden;
+}
+
+.tasksContainer::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.tasksContainer::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 0.625em;
+}
+
+.tasksContainer::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 1.25em;
+}
+
+.userSectionContainer{
+  width:16em;
+  height:15em;
+  border-radius: 1em;
+  display:flex;
+  flex-direction: column;
+  padding:1em;
+  align-items: center;
+  margin:0;
+  position: relative;
+  color:white;
+}
+
+.userSectionContainer.withPic{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.userSectionContainer.noPic{
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.userEditIcon{
+  width:1.5em;
+}
+
+.userEditButton{
+  padding:0.3em;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  top:1.1em;
+  right:1.1em;
+  transition: 0.5s;
+  background-color: rgba(0,0,0,0.35);
+}
+
+.userEditButton:hover{
+  transition: 0.5s;
+  padding:0.3em 0.5em 0.3em 0.5em;
+  box-shadow: 0 0 0.15em rgba(0, 0, 0, 0.4);
+}
+
+.userImage{
+  position: absolute;
+  border-radius: 1em;
+  width:100%;
+  height:100%;
+  background-size: cover;
+  background-position: center;
+  top:0;
+  bottom:0;
+  margin: 0;
+  z-index: -3;
+}
+
+.userNameContainer{
+  height: 80%;
+  width:90%;
+  display: flex;
+  flex-direction: column;
+  align-items:end;
+  justify-content:end;
+  text-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+}
+
+.userCardTitle{
+  padding: 0;
+  font-weight: 700;
+  font-size: 1.5em;
+  margin:0 0 -0.1em 0;
+}
+
+.userCardDescription{
+  padding: 0;
+  font-size: 1.2em;
+  margin:0 0 0 0;
+}
+
+.sectionsMainContainer{
+  display: flex;
+  justify-content: space-between;
+  width: 55.5em;
+  margin: 0.5em auto 2em auto;
+}
+
+.leftSectionContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.calendarSectionContainer{
+  width:16em;
+  height:12.1em;
+  border-radius: 1em;
+  display:flex;
+  flex-direction: row;
+  padding:1em;
+  align-items: center;
+  justify-content: center;
+  margin:0;
+  position: relative;
+  color:white;
+}
+
+.calendarSectionContainer.light{
+  background-color: rgba(33, 40, 46, 0.16);
+}
+
+.calendarSectionContainer.dark{
+  background-color: rgba(255, 255, 255, 0.86);
+}
+
+.dateContainer{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.dayText{
+  margin:0;
+  font-size: 1.2em;
+  color:black;
+}
+
+.dayNumberText{
+  margin:0em 0 -0.1em 0;
+  font-size: 4em;
+  font-weight: 700;
+  color:black;
+}
+
+.monthText{
+  margin:0;
+  font-size: 1.4em;
+  font-weight: 700;
+  color:black;
+}
+
+.yearText{
+  margin:0;
+  font-size: 2em;
+  font-weight: 700;
+  color: #FF7A00;
+}
+
+.verticalSeparator{
+  width:0.1em;
+  height:85%;
+  background-color: black;
+  margin: 0 1.5em 0 1.5em;
+}
+          
+.hourText{
+  margin:0;
+  font-size: 3.5em;
+  font-weight: 700;
+  color:black;
+}
+
+.minutesText{
+  margin:-0.2em 0 -0.3em 0;
+  font-size: 3.5em;
+  font-weight: 700;
+  color:black;
+}
+.amPmText{
+  margin:0;
+  font-size: 2.8em;
+  font-weight: 700;
+  color:#FF7A00;
+}
+                   
