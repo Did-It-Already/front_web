@@ -1,8 +1,9 @@
-import { HashRouter  as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter  as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import MyContext from './context.js';
 
 import Header from "./components/Header.jsx"
+import UserEdit from './pages/userEdit.jsx';
 import FirstPage from './pages/firstPage.jsx';
 import Register from './pages/register.jsx';
 import Login from './pages/login.jsx';
@@ -31,6 +32,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<MainPage />} />
+          <Route path="/user/:slug"  element={<UserEdit />} />
         </Routes>
       </Router>
     </MyContext.Provider>

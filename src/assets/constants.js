@@ -44,6 +44,7 @@ export const habits = [
 ]
 
 export const user = {
+   user_id: 1,
    name: "Nicolas Felipe",
    last_name: "Pardo Machett's",
    email: "npardom@unal.edu.co",

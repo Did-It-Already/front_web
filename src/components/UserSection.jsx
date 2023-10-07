@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import MyContext from '../context.js';
 
@@ -8,10 +9,11 @@ import userBackgroundDark from "../assets/images/userBackgroundDark.png";
 
 function UserSection({user}) {
     const {theme} = useContext(MyContext)
+    const navigate = useNavigate();
 
     return (
         <div className={"userSectionContainer " + (user.profile_picture !== "" ? "withPic" : "noPic")}>
-            <div className={"userEditButton"}>
+            <div className={"userEditButton"}onClick={()=> navigate('/user/'+ user.user_id.toString())}>
                 <img src={editIconLight} className="userEditIcon" />
             </div> 
             <h1 className={"sectionTitle"}>

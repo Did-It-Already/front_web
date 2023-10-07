@@ -9,7 +9,7 @@ function mainPage() {
         <div className="sectionsMainContainer">
             <div className="leftSectionContainer">
                 <UserSection user={user}/>
-                <CalendarSection user={user}/>    
+                <CalendarSection/>    
             </div>
             <TasksSection isHabit={false} tasks ={tasks}/>
             <TasksSection isHabit={true} tasks ={habits}/>
