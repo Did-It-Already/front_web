@@ -6,7 +6,13 @@ import MyContext from '../context.js';
 import closeIcon from "../assets/icons/closeIcon.png";
 import uploadIcon from "../assets/icons/uploadIcon.png";
 
+import { moveHeaderUp } from "../assets/functions.js";
+
 function Register() {
+
+    useEffect(()=>{
+        moveHeaderUp()
+    }, [])
 
     const [profilePicture, setProfilePicture] = useState("");
     const [name, setName] = useState("");
@@ -16,13 +22,6 @@ function Register() {
     const [passwordAgain, setPasswordAgain] = useState("");
 
     const {theme, setTheme} = useContext(MyContext)
-
-    useEffect(()=>{
-        var element = document.getElementById('titleBoxId')
-        if(element.className === 'titleBox'){
-            element.classList.add("normal")
-        }
-    }, [])
 
     // Updates all fields when they change
     const getName = (event) => {

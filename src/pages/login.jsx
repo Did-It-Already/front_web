@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 
 import MyContext from '../context.js';
 
+import { moveHeaderUp } from "../assets/functions.js";
+
 function Login() {
 
     const [email, setEmail] = useState("");
@@ -11,10 +13,7 @@ function Login() {
     const {theme} = useContext(MyContext)
 
     useEffect(()=>{
-        var element = document.getElementById('titleBoxId')
-        if(element.className === 'titleBox'){
-            element.classList.add("normal")
-        }
+        moveHeaderUp()
     }, [])
 
     // Updates fields when they change

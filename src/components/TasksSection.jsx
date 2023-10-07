@@ -9,10 +9,6 @@ function TasksSection({isHabit, tasks}) {
     const [tasksNotDone, setTasksNotDone] = useState(0)
 
     useEffect(()=>{
-        var element = document.getElementById('titleBoxId')
-        if(element.className === 'titleBox'){
-            element.classList.add("normal")
-        }
         setTasksNotDone(tasks.filter(task => !task.is_done).length);
     }, [])
 
@@ -33,7 +29,7 @@ function TasksSection({isHabit, tasks}) {
 
     return (
         <div className={"sectionContainer " + (theme === (isHabit ? "dark": "light") ? "light" : "dark")}>
-           <div className={"addTaskButton " + (theme === (isHabit ? "dark": "light") ? "light" : "dark")}>+</div> 
+           <div className={"addTaskButton " + (theme === (isHabit ? "dark": "light") ? "light" : "dark")} title={'Añadir ' + (isHabit ? 'hábito':'tarea')}>+</div> 
             <h1 className={"sectionTitle"}>{isHabit ? 'hábitos':'tareas'}</h1>
             <TaskCards/>
             {tasks.length > 0 ? 

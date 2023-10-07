@@ -3,17 +3,15 @@ import { NavLink } from "react-router-dom";
 
 import MyContext from '../context.js';
 
+import { moveHeaderDown } from "../assets/functions.js";
+
 function FirstPage() {
     const {theme} = useContext(MyContext)
 
     useEffect(()=>{
-        var element = document.getElementById('titleBoxId')
-        if(element.className === 'titleBox normal'){
-            element.classList.remove("normal")
-        }
+        moveHeaderDown()
     }, [])
 
-    
     return (
         <NavLink to="/login" className={"bigButton " + (theme === "light" ? "light" : "dark")}>
             comenzar

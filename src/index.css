@@ -156,11 +156,37 @@ h1{
   background-color: #FF7A00;
 }
 
+.mainButton.dark2 {
+  background-color: white;
+  color: black;
+  text-shadow: 0 0 0 rgba(0,0,0,0);
+}
+
+.mainButton.red {
+  background-color: rgb(170, 33, 12);
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 0 rgba(0,0,0,0);
+}
+
 .mainButton:hover{
   background-color: rgba(0, 0, 0, 0.5);
   padding:0.4em 1.2em 0.4em 1.2em;
   transition: 0.5s;
-  box-shadow: 0 0 0.6em rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.3);
+}
+
+.mainButton.dark2:hover {
+  background-color: white;
+  padding:0.4em 1.2em 0.4em 1.2em;
+  transition: 0.5s;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.3);
+}
+
+.mainButton.red:hover {
+  background-color: rgb(170, 33, 12);
+  padding:0.4em 1.2em 0.4em 1.2em;
+  transition: 0.5s;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.3);
 }
 
 .mainButton:disabled {
@@ -762,7 +788,7 @@ h1{
 .userEditColumn{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: self-start;
   width: 50%;
 }
 
@@ -791,15 +817,16 @@ h1{
   display: flex;
   flex-direction: row;
   width:100%;
-  height:14.5em
+  height:14.5em;
+  margin-left: 1.7em;
 }
 
 .userEditButtons{
   display: flex;
-  width:22em;
+  width:26em;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .themeButtonsContainer2 {

@@ -5,7 +5,9 @@ import MyContext from '../context.js';
 
 import closeIcon from "../assets/icons/closeIcon.png";
 import uploadIcon from "../assets/icons/uploadIcon.png";
-import { user} from '../assets/constants.js';
+import {user} from '../assets/constants.js';
+
+import { moveHeaderUp, handleLogout } from "../assets/functions.js";
 
 function UserEdit() {
     const {theme, setTheme} = useContext(MyContext);
@@ -17,12 +19,14 @@ function UserEdit() {
     const [lastName, setLastName] = useState(user.last_name);
     const [email, setEmail] = useState(user.email);
 
+    const logout = () => {
+        handleLogout();
+        navigate("/");
+    }
+
     useEffect(()=>{
-        var element = document.getElementById('titleBoxId')
-        if(element.className === 'titleBox'){
-            element.classList.add("normal")
-        }
-        element= document.getElementById("pictureContainerId");
+        moveHeaderUp()
+        var element= document.getElementById("pictureContainerId");
         element.style.backgroundImage = "url('" + profilePicture +"')";
     }, [])
 
@@ -105,8 +109,8 @@ function UserEdit() {
     };
 
     return (
-        <div className={"wideSectionContainer " + (theme === "dark" ? "light" : "dark")}>
-           <div className={"goBackButton " + (theme === "dark" ? "light" : "dark")} onClick={()=> navigate('/main')}>volver</div> 
+        <div className={"wideSectionContainer dark"}>
+           <div className={"goBackButton dark"} onClick={()=> navigate('/main')}>volver</div> 
             <h1 className={"sectionTitle"}>gestionar perfil</h1>
 
             <form className="userEditFormContainer" onSubmit={handleSubmit}>
@@ -116,7 +120,7 @@ function UserEdit() {
                     <input onChange={getName} className="inputField" defaultValue={user.name}required></input>
                     <p className="inputText">apellido(s)*</p>
                     <input onChange={getLastName} className="inputField" defaultValue={user.last_name} required></input>
-                    <p className="inputText">correo electrónico*</p>
+                    <p className="inputText">correo electrónico</p>
                     <p className="emailFieldText">{email}</p>
                 </div>
 
@@ -131,7 +135,7 @@ function UserEdit() {
 
                     <div className="profilePhotoOption">
                         <p className="inputText">foto de perfil</p>
-                        <label htmlFor="uploadPhoto" className ={"uploadImageButton " + (theme === "light" ? "light" : "dark")}>
+                        <label htmlFor="uploadPhoto" className ={"uploadImageButton light"}>
                             <img src={uploadIcon} className="uploadIcon"/>
                         </label>
                         <input type="file" onChange={imageUpload} className ="notShow" id="uploadPhoto" ></input>
@@ -144,13 +148,13 @@ function UserEdit() {
                 </div>
 
                 <div className="userEditButtons">
-                    <button className={"mainButton " + (theme === "light" ? "light" : "dark")}>
-                    editar
+                    <button className={"mainButton dark2"} type="submit">
+                    actualizar
                     </button>
-                    <button className={"mainButton " + (theme === "light" ? "light" : "dark")}>
-                    borrar
+                    <button className={"mainButton red"} type="button">
+                    eliminar
                     </button>
-                    <button className={"mainButton " + (theme === "light" ? "light" : "dark")}>
+                    <button className={"mainButton light"} onClick={logout} type="button">
                     cerrar sesión
                     </button>
                 </div>

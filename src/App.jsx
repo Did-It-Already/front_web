@@ -13,6 +13,7 @@ import corner from "./assets/images/corner.png";
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') === null ? "light": localStorage.getItem('theme'));
+  const [currentUser, setCurrentUser] = useState({});
 
   useEffect(()=>{
     // Store theme in local storage
@@ -22,7 +23,7 @@ function App() {
   }, [theme])
 
   return (
-    <MyContext.Provider value={{ theme, setTheme }}>
+    <MyContext.Provider value={{ theme, setTheme, currentUser, setCurrentUser }}>
       <Router>
         <Header/>
         <img src={corner} className = "corner left"/>
