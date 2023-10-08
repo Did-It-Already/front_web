@@ -1,16 +1,17 @@
 import { useState , useContext, useEffect} from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink , useNavigate} from "react-router-dom";
 
 import MyContext from '../context.js';
 
-import { moveHeaderUp } from "../assets/functions.js";
+import { moveHeaderUp, getUserInfo } from "../assets/functions.js";
 
 function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const {theme} = useContext(MyContext)
+    const {theme, setCurrentUser} = useContext(MyContext)
 
     useEffect(()=>{
         moveHeaderUp()
@@ -23,28 +24,43 @@ function Login() {
 
     const getPassword = (event) => {
         setPassword(event.target.value);
-      };
+    };
 
     // Sends the received information to the server
     const handleSubmit = (e) => {
         e.preventDefault();
+        const mutation = `
+            mutation {
+                login(user: {
+                    email: "${email}"
+                    password: "${password}"
+                }) {
+                    access
+                    refresh
+                    status
+                }
+            }
+        `;
 
-        const body = {
-            "email": email,
-            "password": password
-        };
-
-        alert(JSON.stringify(body))
-    
-        fetch("http://127.0.0.1:8000/users/", {
-            method: "POST",
+        fetch('http://127.0.0.1:5000/graphql', {
+            method: 'POST',
             mode: "cors",
-            body: formData
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({query: mutation}),
         })
         .then((response) => response.json())
         .then((result) => {
-            if(result.user_id){
-                alert("Usuario creado correctamente");
+            if(!result.errors){
+                var access = result.data.login.access
+                var refresh = result.data.login.refresh
+                localStorage.setItem("access",access)
+                localStorage.setItem("refresh",refresh)
+                getUserInfo(access).then((userData) => {setCurrentUser(userData)})
+                navigate("/main");
+            }else{
+                alert("Usuario o contraseña incorrectos.")
             }
         });  
     };

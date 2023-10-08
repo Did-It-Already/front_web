@@ -1,34 +1,37 @@
 import { useState, useContext,useEffect} from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import MyContext from '../context.js';
 
 import closeIcon from "../assets/icons/closeIcon.png";
 import uploadIcon from "../assets/icons/uploadIcon.png";
-import {user} from '../assets/constants.js';
+import goBackIcon from "../assets/icons/goBackIcon.png";
 
-import { moveHeaderUp, handleLogout } from "../assets/functions.js";
+import { moveHeaderUp, deleteLocalStorage, accessToken } from "../assets/functions.js";
 
 function UserEdit() {
-    const {theme, setTheme} = useContext(MyContext);
+    const {theme, setTheme, currentUser,setCurrentUser} = useContext(MyContext);
     const navigate = useNavigate();
-    const { slug } = useParams();
 
-    const [profilePicture, setProfilePicture] = useState(user.profile_picture);
-    const [name, setName] = useState(user.name);
-    const [lastName, setLastName] = useState(user.last_name);
-    const [email, setEmail] = useState(user.email);
-
-    const logout = () => {
-        handleLogout();
-        navigate("/");
-    }
+    const [profilePicture, setProfilePicture] = useState("");
+    const [name, setName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
 
     useEffect(()=>{
         moveHeaderUp()
-        var element= document.getElementById("pictureContainerId");
-        element.style.backgroundImage = "url('" + profilePicture +"')";
     }, [])
+
+    useEffect(()=>{
+        if(currentUser.name){
+            setProfilePicture(currentUser.profile_picture);
+            setName(currentUser.name);
+            setLastName(currentUser.last_name);
+            setEmail(currentUser.email);
+            document.getElementById("pictureContainerId").style.backgroundImage = "url('" + currentUser.profile_picture +"')";
+        }
+    }, [currentUser])
+
 
     // Updates all fields when they change
     const getName = (event) => {
@@ -82,44 +85,95 @@ function UserEdit() {
         setProfilePicture("");
     }
 
+    const logout = () => {
+        deleteLocalStorage();
+        setCurrentUser({})
+        navigate("/");
+    }
+
     // Sends the received information to the server
-    const handleSubmit = (e) => {
+    const handleUpdate = (e) => {
         e.preventDefault();
 
-        const body = {
-            "name": name,
-            "last_name": lastName,
-            "theme": theme,
-            "profile_picture": profilePicture
-        };
+        const mutation = `
+        mutation {
+            updateUser(user:{
+              name: "${name}"
+              last_name: "${lastName}"
+              theme: "${theme}"
+              profile_picture: "${profilePicture}"
+            }){
+              name
+              last_name
+              email
+              theme
+              profile_picture
+            }
+          }
+        `;
 
-        alert(JSON.stringify(body))
-    
-        fetch("http://127.0.0.1:8000/users/", {
-            method: "POST",
+        fetch('http://127.0.0.1:5000/graphql', {
+            method: 'POST',
             mode: "cors",
-            body: formData
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + accessToken(),
+            },
+            body: JSON.stringify({query: mutation}),
         })
         .then((response) => response.json())
         .then((result) => {
-            if(result.user_id){
-                alert("Usuario creado correctamente");
+            if(!result.errors){
+                setCurrentUser(result.data.updateUser)
+                alert("Sus datos fueron actualizados correctamente.")
             }
-        });  
+        });
+    };
+
+    // Sends the received information to the server
+    const handleDelete = (e) => {
+        e.preventDefault();
+
+        const mutation = `
+        mutation {
+            deleteUser{
+              user_id
+            }
+          }
+        `;
+
+        fetch('http://127.0.0.1:5000/graphql', {
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + accessToken(),
+            },
+            body: JSON.stringify({query: mutation}),
+        })
+        .then((response) => response.json())
+        .then((result) => {
+            if(!result.errors){
+                alert("Su cuenta ha sido eliminada.")
+                logout()
+            }
+        }); 
     };
 
     return (
         <div className={"wideSectionContainer dark"}>
-           <div className={"goBackButton dark"} onClick={()=> navigate('/main')}>volver</div> 
-            <h1 className={"sectionTitle"}>gestionar perfil</h1>
+           <div className={"userEditButton userGoBackButton"} onClick={()=> navigate('/main')}>
+                <img src={goBackIcon} className="userEditIcon" />
+            </div> 
+            <h1 className={"sectionTitle"}>gestionar cuenta</h1>
 
-            <form className="userEditFormContainer" onSubmit={handleSubmit}>
+            <form className="userEditFormContainer" onSubmit={handleUpdate}>
             <div className="userEditFieldsContainer">
                 <div className="userEditColumn">
                     <p className="inputText">nombre(s)*</p>
-                    <input onChange={getName} className="inputField" defaultValue={user.name}required></input>
+                    <input onChange={getName} className="inputField" defaultValue={name}required></input>
                     <p className="inputText">apellido(s)*</p>
-                    <input onChange={getLastName} className="inputField" defaultValue={user.last_name} required></input>
+                    <input onChange={getLastName} className="inputField" defaultValue={lastName} required></input>
                     <p className="inputText">correo electrónico</p>
                     <p className="emailFieldText">{email}</p>
                 </div>
@@ -151,19 +205,14 @@ function UserEdit() {
                     <button className={"mainButton dark2"} type="submit">
                     actualizar
                     </button>
-                    <button className={"mainButton red"} type="button">
+                    <button className={"mainButton red"} onClick={handleDelete} type="button">
                     eliminar
                     </button>
                     <button className={"mainButton light"} onClick={logout} type="button">
                     cerrar sesión
                     </button>
                 </div>
-
             </form>
-
-
-
-
         </div>
     )
 }

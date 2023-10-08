@@ -8,11 +8,11 @@ import lightLogo from "../assets/logos/lightLogo.png";
 
 function Header() {
     const { theme } = useContext(MyContext)
-    return <div className = "titleBox" id="titleBoxId">
-            <NavLink to="/">
-                <img src={theme ==="light" ? lightLogo : darkLogo } className = "websiteLogo"/>
-            </NavLink>
-        </div>
+    return <div className = "titleBox normal" id="titleBoxId">
+        <NavLink to="/">
+            <img src={theme ==="light" ? lightLogo : darkLogo } className = "websiteLogo"/>
+        </NavLink>
+    </div>
 }
 
 export default Header

@@ -29,7 +29,7 @@ function TaskCard({task, isHabit}) {
         </div>
       </div>
 
-      <div className="taskEditButton" title ="Editar tarea" >
+      <div className="taskEditButton" title ={"Editar " + (isHabit ? "hábito": "tarea")}>
           <img src={task.is_done ? editIconLight: editIconDark} className="taskEditIcon" />
       </div> 
     </div>

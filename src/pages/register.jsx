@@ -1,5 +1,5 @@
 import { useState , useContext,useEffect} from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import MyContext from '../context.js';
 
@@ -20,6 +20,8 @@ function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordAgain, setPasswordAgain] = useState("");
+
+    const navigate = useNavigate();
 
     const {theme, setTheme} = useContext(MyContext)
 
@@ -96,26 +98,41 @@ function Register() {
     // Sends the received information to the server
     const handleSubmit = (e) => {
         e.preventDefault();
+        const mutation = `
+            mutation {
+            register(user: {
+                name: "${name}"
+                last_name: "${lastName}"
+                email: "${email}"
+                password: "${password}"
+                theme: "${theme}"
+                profile_picture: "${profilePicture}"
+            }) {
+                data {
+                user {
+                    email
+                    user_id
+                }
+                }
+            }
+            }
+        `;
 
-        const body = {
-            "name": name,
-            "last_name": lastName,
-            "email": email,
-            "theme": theme,
-            "profile_picture": profilePicture
-        };
-
-        alert(JSON.stringify(body))
-    
-        fetch("http://127.0.0.1:8000/users/", {
-            method: "POST",
+        fetch('http://127.0.0.1:5000/graphql', {
+            method: 'POST',
             mode: "cors",
-            body: formData
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({query: mutation}),
         })
         .then((response) => response.json())
         .then((result) => {
-            if(result.user_id){
-                alert("Usuario creado correctamente");
+            if(!result.errors){
+                alert("Usuario creado correctamente.")
+                navigate('/login')
+            }else{
+                alert("Este correo ya está registrado.")
             }
         });  
     };

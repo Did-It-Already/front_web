@@ -1,15 +1,17 @@
-import { useEffect} from "react";
+import { useEffect, useContext} from "react";
 
+import MyContext from '../context.js';
 
 import UserSection from "../components/UserSection.jsx";
 import CalendarSection from "../components/CalendarSection.jsx";
 import TasksSection from "../components/TasksSection.jsx";
 
-import {tasks, habits, user} from '../assets/constants.js'
-
+import {tasks, habits} from '../assets/constants.js'
 import { moveHeaderUp } from "../assets/functions.js";
 
 function mainPage() {
+
+    const {currentUser} = useContext(MyContext)
 
     useEffect(()=>{
         moveHeaderUp()
@@ -18,7 +20,7 @@ function mainPage() {
     return (
         <div className="sectionsMainContainer">
             <div className="leftSectionContainer">
-                <UserSection user={user}/>
+                <UserSection user={currentUser}/>
                 <CalendarSection/>    
             </div>
             <TasksSection isHabit={false} tasks ={tasks}/>

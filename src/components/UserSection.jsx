@@ -13,11 +13,11 @@ function UserSection({user}) {
 
     return (
         <div className={"userSectionContainer " + (user.profile_picture !== "" ? "withPic" : "noPic")}>
-            <div className={"userEditButton"}onClick={()=> navigate('/user/'+ user.user_id.toString())}>
+            <div className={"userEditButton"}onClick={()=> navigate('/user')} title ="Gestionar cuenta">
                 <img src={editIconLight} className="userEditIcon" />
             </div> 
             <h1 className={"sectionTitle"}>
-            mi perfil</h1>
+            mi cuenta</h1>
 
             <img src={user.profile_picture !== "" ? user.profile_picture : (theme === 'light' ? userBackgroundLight: userBackgroundDark)} className="userImage" />
             
