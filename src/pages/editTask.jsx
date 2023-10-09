@@ -1,5 +1,5 @@
 import { useState, useContext,useEffect} from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import MyContext from '../context.js';
 
@@ -7,17 +7,44 @@ import goBackIcon from "../assets/icons/goBackIcon.png";
 
 import { moveHeaderUp, accessToken } from "../assets/functions.js";
 
-function CreateTask() {
+function EditTask() {
     const {theme} = useContext(MyContext);
     const navigate = useNavigate();
+    const { slug } = useParams();
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [date, setDate] = useState("");
+    const [task, setTask] = useState({});
 
     useEffect(()=>{
         moveHeaderUp()
+        var id = slug;
+        fetch("https://bogoparchebackend-production-5a1a.up.railway.app/api/activity/"+id , {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + accessToken()
+            } 
+        })
+        .then((res) => res.json())
+        .then((dato) => {
+            if(dato.error){
+                navigate("/main");
+            }else{
+
+            }
+        });
     }, [])
+
+    useEffect(()=>{
+        if(task.name){
+            setName(task.name);
+            setDescription(task.description);
+            setDate(task.date);
+        }
+    }, [task])
 
     // Updates all fields when they change
     const getName = (event) => {
@@ -33,7 +60,7 @@ function CreateTask() {
     };
 
     // Sends the received information to the server
-    const handleSubmit = (e) => {
+    const handleUpdate = (e) => {
         e.preventDefault();
 
         const mutation = `
@@ -60,8 +87,7 @@ function CreateTask() {
         .then((response) => response.json())
         .then((result) => {
             if(!result.errors){
-                alert("Tarea creada correctamente.")
-                window.location.reload()
+                alert("Tarea actualizada correctamente.")
             }
         });
     };
@@ -71,22 +97,28 @@ function CreateTask() {
            <div className={"userEditButton userGoBackButton"} onClick={()=> navigate('/main')}>
                 <img src={goBackIcon} className="userEditIcon" />
             </div> 
-            <h1 className={"sectionTitle"}>añadir tarea</h1>
+            <h1 className={"sectionTitle"}>editar tarea</h1>
 
-            <form className="taskEditFormContainer" onSubmit={handleSubmit}>
+            <form className="taskEditFormContainer" onSubmit={handleUpdate}>
                 <p className="inputText">nombre</p>
-                <input onChange={getName} className="inputField" required></input>
+                <input onChange={getName} className="inputField" required defaultValue={name}></input>
                 <p className="inputText">descripcion</p>
-                <textarea onChange={getDescription} className="inputField description" required></textarea>
+                <textarea onChange={getDescription} className="inputField description" required defaultValue={description}></textarea>
                 <p className="inputText">fecha</p>
-                <input className="inputField date" type="date" onChange={getDate} required></input>
+                <input className="inputField date" type="date" onChange={getDate} required defaultValue={date}></input>
 
-                <button className={"mainButton " + (theme === "light" ? "dark" : "light")} type="submit">
-                    crear tarea
-                </button>
+                <div className="taskEditButtons">
+                    <button className={"mainButton dark2"} type="submit">
+                    actualizar
+                    </button>
+                    <button className={"mainButton red"} type="button">
+                    eliminar
+                    </button>
+                </div>
+
             </form>
         </div>
     )
 }
 
-export default CreateTask
+export default EditTask

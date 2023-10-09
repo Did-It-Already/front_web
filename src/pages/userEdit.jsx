@@ -174,7 +174,7 @@ function UserEdit() {
             <div className="userEditFieldsContainer">
                 <div className="userEditColumn">
                     <p className="inputText">nombre(s)*</p>
-                    <input onChange={getName} className="inputField" defaultValue={name}required></input>
+                    <input onChange={getName} className="inputField" defaultValue={name} required></input>
                     <p className="inputText">apellido(s)*</p>
                     <input onChange={getLastName} className="inputField" defaultValue={lastName} required></input>
                     <p className="inputText">correo electrónico</p>

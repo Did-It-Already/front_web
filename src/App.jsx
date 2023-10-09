@@ -10,6 +10,8 @@ import Login from './pages/login.jsx';
 import MainPage from './pages/mainPage.jsx';
 import CreateTask from './pages/createTask.jsx';
 import CreateHabit from './pages/createHabit.jsx';
+import EditTask from './pages/editTask.jsx';
+import EditHabit from './pages/editHabit.jsx';
 
 import corner from "./assets/images/corner.png";
 import { changeBodyColor, loggedInUser, getUserInfo, accessToken, getHabits, getTasks } from './assets/functions.js';
@@ -52,6 +54,8 @@ function App() {
           <Route path="/user" element={loggedInUser() ? <UserEdit/>:<Navigate replace to={"/login"}/>}  />
           <Route path="/createTask" element={loggedInUser() ? <CreateTask/>:<Navigate replace to={"/login"}/>} />
           <Route path="/createHabit" element={loggedInUser() ? <CreateHabit/>:<Navigate replace to={"/login"}/>}  />
+          <Route path="/editTask/:slug" element={loggedInUser() ? <EditTask/>:<Navigate replace to={"/login"}/>} />
+          <Route path="/editHabit/:slug" element={loggedInUser() ? <EditHabit/>:<Navigate replace to={"/login"}/>}  /> 
         </Routes>
       </Router>
     </MyContext.Provider>

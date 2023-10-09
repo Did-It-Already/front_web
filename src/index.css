@@ -143,6 +143,16 @@ h1{
 .inputField.frequency {
   margin:0 0.5em 0 0.5em;
   width:3em;
+  height:1.1em;
+}
+
+.inputField.date {
+  margin:0;
+}
+
+.inputField.description{
+  height:3.5em;
+  resize: none;
 }
 
 .mainButton {
@@ -777,12 +787,12 @@ h1{
 }
 
 .wideSectionContainer{
-  width:30em;
+  width:27em;
   height:24em;
   border-radius: 1em;
   display:flex;
   flex-direction: column;
-  padding:0.1em 1em 0em 1em;
+  padding:0.1em 1.5em 0em 1.5em;
   align-items: center;
   justify-content: center;
   margin:0.5em auto 2em auto;
@@ -807,10 +817,19 @@ h1{
 
 .userEditButtons{
   display: flex;
-  width:26em;
+  width:95%;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+.taskEditButtons{
+  display: flex;
+  width:78%;
+  flex-direction: row;
+  align-items: center;
+  margin-top:0.3em;
+  justify-content: space-between;
 }
 
 .themeButtonsContainer2 {
@@ -824,7 +843,7 @@ h1{
 
 .themeFocuser.selectedRight2 {
   background-image: url('assets/icons/moonIcon.png');
-  margin-left:11em;
+  margin-left:10em;
   transition: 1s;
   transform: rotate(180deg);
 }
@@ -841,11 +860,11 @@ h1{
 
 .smallSectionContainer{
   width:20em;
-  height:23em;
+  height:25em;
   border-radius: 1em;
   display:flex;
   flex-direction: column;
-  padding:0.1em 1em 0em 1em;
+  padding:0.2em 1em 0em 1em;
   align-items: center;
   justify-content: center;
   margin:0.5em auto 2em auto;
