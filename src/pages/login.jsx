@@ -57,7 +57,10 @@ function Login() {
                 var refresh = result.data.login.refresh
                 localStorage.setItem("access",access)
                 localStorage.setItem("refresh",refresh)
-                getUserInfo(access).then((userData) => {setCurrentUser(userData)})
+                getUserInfo(access).then((userData) => {
+                    setCurrentUser(userData)
+                    localStorage.setItem('theme', userData.theme)
+                })
                 navigate("/main");
             }else{
                 alert("Usuario o contraseña incorrectos.")

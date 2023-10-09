@@ -140,6 +140,11 @@ h1{
   box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
 }
 
+.inputField.frequency {
+  margin:0 0.5em 0 0.5em;
+  width:3em;
+}
+
 .mainButton {
   font-family: "League Spartan", sans-serif;
   font-weight: 700;
@@ -822,4 +827,40 @@ h1{
   margin-left:11em;
   transition: 1s;
   transform: rotate(180deg);
+}
+
+
+.taskEditFormContainer{
+  width:100%;
+  display:flex;
+  flex-direction: column;
+  padding:0;
+  align-items: center;
+  margin:0;
+}
+
+.smallSectionContainer{
+  width:20em;
+  height:23em;
+  border-radius: 1em;
+  display:flex;
+  flex-direction: column;
+  padding:0.1em 1em 0em 1em;
+  align-items: center;
+  justify-content: center;
+  margin:0.5em auto 2em auto;
+  position: relative;
+}
+
+.smallSectionContainer.light{
+  background-color: rgb(90, 96, 100);
+}
+
+.smallSectionContainer.dark{
+  background-color: #FF7A00;
+}
+
+.frequencyContainer{
+  display: flex;
+  align-items: center;
 }

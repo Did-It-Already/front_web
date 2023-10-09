@@ -88,6 +88,8 @@ function UserEdit() {
     const logout = () => {
         deleteLocalStorage();
         setCurrentUser({})
+        setCurrentTasks([])
+        setCurrentHabits([])
         navigate("/");
     }
 
@@ -125,6 +127,7 @@ function UserEdit() {
         .then((result) => {
             if(!result.errors){
                 setCurrentUser(result.data.updateUser)
+                localStorage.setItem('theme', theme)
                 alert("Sus datos fueron actualizados correctamente.")
             }
         });
@@ -137,7 +140,7 @@ function UserEdit() {
         const mutation = `
         mutation {
             deleteUser{
-              user_id
+              message
             }
           }
         `;
