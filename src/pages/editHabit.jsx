@@ -8,7 +8,7 @@ import goBackIcon from "../assets/icons/goBackIcon.png";
 import { moveHeaderUp, accessToken } from "../assets/functions.js";
 
 function EditHabit() {
-    const {theme} = useContext(MyContext);
+    const {theme, currentHabits, setCurrentHabits} = useContext(MyContext);
     const navigate = useNavigate();
     const { slug } = useParams();
 
@@ -19,21 +19,33 @@ function EditHabit() {
 
     useEffect(()=>{
         moveHeaderUp()
-        var id = slug;
-        fetch("https://bogoparchebackend-production-5a1a.up.railway.app/api/activity/"+id , {
-            method: "GET",
+        const query = `
+        query {
+            userHabits(_id: "${slug}"){
+              name
+              start_date
+              description
+              _id
+              is_done
+              frequency
+            }
+          }
+        `;
+        fetch('http://127.0.0.1:5000/graphql', {
+            method: 'POST',
             mode: "cors",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + accessToken()
-            } 
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + accessToken(),
+            },
+            body: JSON.stringify({query}),
         })
-        .then((res) => res.json())
-        .then((dato) => {
-            if(dato.error){
-                navigate("/main");
+        .then((response) => response.json())
+        .then((result) => {
+            if(!result.errors){
+                setHabit(result.data.userHabits[0])
             }else{
-
+                navigate("/main")
             }
         });
     }, [])
@@ -65,15 +77,16 @@ function EditHabit() {
 
         const mutation = `
         mutation {
-            createHabit( habit: {
+            updateHabit(_id: "${slug}", habit: {
               name: "${name}"
-              description:"${description}"
+              description: "${description}"
               frequency: ${frequency}
             }){
               name
               start_date
               description
-              
+              frequency
+              _id
             }
           }
         `;
@@ -91,6 +104,13 @@ function EditHabit() {
         .then((result) => {
             if(!result.errors){
                 alert("Hábito actualizado correctamente.")
+                var deepCopyList = JSON.parse(JSON.stringify(currentHabits));
+                const indexToUpdate = deepCopyList.findIndex(item => item._id === slug);
+                deepCopyList[indexToUpdate].name = name;
+                deepCopyList[indexToUpdate].description = description;
+                deepCopyList[indexToUpdate].frequency = frequency;
+                setCurrentHabits(deepCopyList)
+                navigate("/main")
             }
         });
     };
@@ -114,15 +134,9 @@ function EditHabit() {
                     <p className="inputText">días</p>
                 </div>
 
-                <div className="taskEditButtons">
-                    <button className={"mainButton dark2"} type="submit">
-                    actualizar
-                    </button>
-                    <button className={"mainButton red"} type="button">
-                    eliminar
-                    </button>
-                </div>
-
+                <button className={"mainButton dark2"} type="submit">
+                actualizar
+                </button>
             </form>
         </div>
     )

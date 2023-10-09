@@ -3,7 +3,7 @@ import { NavLink , useNavigate} from "react-router-dom";
 
 import MyContext from '../context.js';
 
-import { moveHeaderUp, getUserInfo } from "../assets/functions.js";
+import { moveHeaderUp, getUserInfo, getHabits, getTasks} from "../assets/functions.js";
 
 function Login() {
 
@@ -11,7 +11,7 @@ function Login() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const {theme, setCurrentUser} = useContext(MyContext)
+    const {theme, setCurrentUser, setCurrentHabits, setCurrentTasks} = useContext(MyContext)
 
     useEffect(()=>{
         moveHeaderUp()
@@ -61,6 +61,8 @@ function Login() {
                     setCurrentUser(userData)
                     localStorage.setItem('theme', userData.theme)
                 })
+                getHabits(access).then((habits) => {setCurrentHabits(habits)})
+                getTasks(access).then((tasks) => {setCurrentTasks(tasks)})
                 navigate("/main");
             }else{
                 alert("Usuario o contraseña incorrectos.")

@@ -10,7 +10,7 @@ import goBackIcon from "../assets/icons/goBackIcon.png";
 import { moveHeaderUp, deleteLocalStorage, accessToken } from "../assets/functions.js";
 
 function UserEdit() {
-    const {theme, setTheme, currentUser,setCurrentUser} = useContext(MyContext);
+    const {theme, setTheme, currentUser,setCurrentUser, setCurrentTasks, setCurrentHabits} = useContext(MyContext);
     const navigate = useNavigate();
 
     const [profilePicture, setProfilePicture] = useState("");
@@ -129,14 +129,13 @@ function UserEdit() {
                 setCurrentUser(result.data.updateUser)
                 localStorage.setItem('theme', theme)
                 alert("Sus datos fueron actualizados correctamente.")
+                navigate("/main")
             }
         });
     };
 
     // Sends the received information to the server
     const handleDelete = (e) => {
-        e.preventDefault();
-
         const mutation = `
         mutation {
             deleteUser{
@@ -210,9 +209,6 @@ function UserEdit() {
                     </button>
                     <button className={"mainButton red"} onClick={handleDelete} type="button">
                     eliminar
-                    </button>
-                    <button className={"mainButton light"} onClick={logout} type="button">
-                    cerrar sesión
                     </button>
                 </div>
             </form>

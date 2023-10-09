@@ -8,7 +8,7 @@ import goBackIcon from "../assets/icons/goBackIcon.png";
 import { moveHeaderUp, accessToken } from "../assets/functions.js";
 
 function EditTask() {
-    const {theme} = useContext(MyContext);
+    const {theme, currentTasks, setCurrentTasks} = useContext(MyContext);
     const navigate = useNavigate();
     const { slug } = useParams();
 
@@ -19,27 +19,37 @@ function EditTask() {
 
     useEffect(()=>{
         moveHeaderUp()
-        var id = slug;
-        fetch("https://bogoparchebackend-production-5a1a.up.railway.app/api/activity/"+id , {
-            method: "GET",
+        const query = `
+        query {
+            taskById(task_id:"${slug}"){
+                name
+                description
+                date
+                is_done
+            }
+        }
+        `;
+        fetch('http://127.0.0.1:5000/graphql', {
+            method: 'POST',
             mode: "cors",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + accessToken()
-            } 
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + accessToken(),
+            },
+            body: JSON.stringify({query}),
         })
-        .then((res) => res.json())
-        .then((dato) => {
-            if(dato.error){
-                navigate("/main");
+        .then((response) => response.json())
+        .then((result) => {
+            if(!result.errors){
+                setTask(result.data.taskById)
             }else{
-
+                navigate("/main")
             }
         });
     }, [])
 
-    useEffect(()=>{
-        if(task.name){
+    useEffect(() => {
+        if(task.name) {
             setName(task.name);
             setDescription(task.description);
             setDate(task.date);
@@ -65,12 +75,15 @@ function EditTask() {
 
         const mutation = `
         mutation {
-            createTask(task: {
+            updateTask(task_id: "${slug}",task: {
               name: "${name}"
               description:"${description}"
               date: "${date}"
             }){
-              InsertedID
+              MatchedCount
+              ModifiedCount
+              UpsertedCount
+              UpsertedID
             }
           }
         `;
@@ -88,6 +101,13 @@ function EditTask() {
         .then((result) => {
             if(!result.errors){
                 alert("Tarea actualizada correctamente.")
+                var deepCopyList = JSON.parse(JSON.stringify(currentTasks));
+                const indexToUpdate = deepCopyList.findIndex(item => item._id === slug);
+                deepCopyList[indexToUpdate].name = name;
+                deepCopyList[indexToUpdate].description = description;
+                deepCopyList[indexToUpdate].date = date;
+                setCurrentTasks(deepCopyList)
+                navigate("/main")
             }
         });
     };
@@ -107,15 +127,9 @@ function EditTask() {
                 <p className="inputText">fecha</p>
                 <input className="inputField date" type="date" onChange={getDate} required defaultValue={date}></input>
 
-                <div className="taskEditButtons">
-                    <button className={"mainButton dark2"} type="submit">
+                <button className={"mainButton dark2"} type="submit">
                     actualizar
-                    </button>
-                    <button className={"mainButton red"} type="button">
-                    eliminar
-                    </button>
-                </div>
-
+                </button>
             </form>
         </div>
     )
