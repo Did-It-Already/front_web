@@ -8,7 +8,7 @@ import goBackIcon from "../assets/icons/goBackIcon.png";
 import { moveHeaderUp, accessToken } from "../assets/functions.js";
 
 function EditHabit() {
-    const {theme, currentHabits, setCurrentHabits} = useContext(MyContext);
+    const {theme, currentHabits, setCurrentHabits, putNotifyPopUp} = useContext(MyContext);
     const navigate = useNavigate();
     const { slug } = useParams();
 
@@ -103,7 +103,7 @@ function EditHabit() {
         .then((response) => response.json())
         .then((result) => {
             if(!result.errors){
-                alert("Hábito actualizado correctamente.")
+                putNotifyPopUp("Hábito actualizado correctamente.")
                 var deepCopyList = JSON.parse(JSON.stringify(currentHabits));
                 const indexToUpdate = deepCopyList.findIndex(item => item._id === slug);
                 deepCopyList[indexToUpdate].name = name;

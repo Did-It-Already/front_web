@@ -5,10 +5,10 @@ import MyContext from '../context.js';
 
 import goBackIcon from "../assets/icons/goBackIcon.png";
 
-import { moveHeaderUp, accessToken } from "../assets/functions.js";
+import { moveHeaderUp, accessToken, getHabits } from "../assets/functions.js";
 
 function CreateHabit() {
-    const {theme} = useContext(MyContext);
+    const {theme,putNotifyPopUp, setCurrentHabits} = useContext(MyContext);
     const navigate = useNavigate();
 
     const [name, setName] = useState("");
@@ -63,8 +63,13 @@ function CreateHabit() {
         .then((response) => response.json())
         .then((result) => {
             if(!result.errors){
-                alert("Hábito creado correctamente.")
-                window.location.reload()
+                putNotifyPopUp("Hábito creado correctamente.")
+                setTimeout(function() {
+                    getHabits(accessToken()).then((habits) => {
+                        setCurrentHabits(habits)
+                        navigate("/main")
+                    });
+                }, 1500);             
             }
         });
     };
@@ -84,7 +89,7 @@ function CreateHabit() {
                 <p className="inputText">frecuencia</p>
                 <div className="frequencyContainer">
                     <p className="inputText">cada</p>
-                    <input className="inputField frequency" min = "1" type="number" onChange={getFrequency} required></input>
+                    <input className="inputField frequency" min = "1" defaultValue="1" type="number" onChange={getFrequency} required></input>
                     <p className="inputText">días</p>
                 </div>
                 <button className={"mainButton " + (theme === "light" ? "light" : "dark")} type="submit">

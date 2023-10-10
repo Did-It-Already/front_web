@@ -49,6 +49,7 @@ h1{
   flex-direction: column;
   width: fit-content;
   margin: auto;
+  animation: 0.5s ease-out 0s 1 slideInFromLeft;
 }
 
 .formTitle{
@@ -678,6 +679,7 @@ h1{
   justify-content: space-between;
   width: 55.5em;
   margin: 0.5em auto 2em auto;
+  animation: 0.5s ease-out 0s 1 slideInFromLeft;
 }
 
 .leftSectionContainer{
@@ -805,6 +807,7 @@ h1{
   justify-content: center;
   margin:0.5em auto 2em auto;
   position: relative;
+  animation: 0.5s ease-out 0s 1 slideInFromLeft;
 }
 
 .wideSectionContainer.light{
@@ -852,7 +855,7 @@ h1{
 
 .themeFocuser.selectedRight2 {
   background-image: url('assets/icons/moonIcon.png');
-  margin-left:10em;
+  margin-left:9.8em;
   transition: 1s;
   transform: rotate(180deg);
 }
@@ -878,6 +881,7 @@ h1{
   justify-content: center;
   margin:0.5em auto 2em auto;
   position: relative;
+  animation: 0.5s ease-out 0s 1 slideInFromLeft;
 }
 
 .smallSectionContainer.light{
@@ -891,4 +895,83 @@ h1{
 .frequencyContainer{
   display: flex;
   align-items: center;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateY(-5%);
+    opacity: 0%;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 100%;
+  }
+}
+
+.popUpWhole{
+  position:fixed;
+  top: 0;
+  bottom:0;
+  right: 0;
+  left:0;
+  z-index:-1000;
+  transition: 0.5s;
+}
+
+.popUpCard{
+  width: 10em;
+  height:11em;
+  background-image: url("./assets/images/popUpBackground.png");
+  background-size: cover;
+  border-radius: 0.7em;
+  position:absolute;
+  top: -25em;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-family: "League Spartan", sans-serif;
+  font-weight: 700;
+  padding:0.6em;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.1em;
+  transition: 1s;
+  color:white;
+  text-shadow: 0 0 0.35em rgba(0, 0, 0, 0.5);
+}
+
+.appeared{
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index:999;
+  transition: 1s;
+}
+
+.movedDown{
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0em 0em 1.25em rgba(0, 0, 0, 0.4);
+  transition: 1s;
+}
+
+.doneButton{
+  border-radius: 1.5em;
+  width: 2.2em;
+  height:2.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.doneButton:hover{
+  background-color: rgba(255, 255, 255, 0.3);
+  width: 2.4em;
+  height:2.4em;
+  transition: 0.5s;
+}
+
+.doneLogo{
+  width:110%;
 }

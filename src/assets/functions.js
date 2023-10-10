@@ -164,3 +164,16 @@ export const accessToken = () => {
 export const loggedInUser = () => {
   return (localStorage.getItem("refresh") && localStorage.getItem("access"))
 }
+
+// Function for showing hidden pop-ups  
+export function togglePopUp (remove){
+  var element = document.getElementById("popUpBackground");
+  var element2 = document.getElementById("popUpId");
+  if(remove){
+    element.classList.remove('appeared');
+    element2.classList.remove("movedDown");
+  }else{
+    element.classList.add('appeared');
+    element2.classList.add("movedDown");
+  }
+}

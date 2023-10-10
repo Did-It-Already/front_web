@@ -1,4 +1,4 @@
-import { useContext} from "react";
+import { useContext, useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 
 import editIconLight from "../assets/icons/editIconLight.png";
@@ -13,8 +13,18 @@ import { accessToken } from "../assets/functions";
 
 function TaskCard({task, isHabit}) {
   const {setCurrentHabits, currentHabits, setCurrentTasks, currentTasks} = useContext(MyContext);
+  const [date, setDate]= useState('')
 
-  var date = new Date(task.date).toLocaleDateString();
+  useEffect(()=> {
+    if(task.date){
+      var parts = task.date.split('-');
+      var year = parts[0];
+      var month = parts[1];
+      var day = parts[2];
+      setDate(`${day}/${month}/${year}`);
+    }
+  }, [task])
+
   const navigate = useNavigate()
 
   const goToEdit = () => {
@@ -47,7 +57,7 @@ function TaskCard({task, isHabit}) {
             var deepCopyList = JSON.parse(JSON.stringify(currentHabits));
             for (var i = 0; i < deepCopyList.length; i++) {
               if (deepCopyList[i]._id === task._id) {
-                deepCopyList[i].is_done = true;
+                deepCopyList[i].is_done = !deepCopyList[i].is_done;
                 break;
               }
             }

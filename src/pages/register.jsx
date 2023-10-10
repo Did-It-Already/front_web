@@ -23,7 +23,7 @@ function Register() {
 
     const navigate = useNavigate();
 
-    const {theme, setTheme} = useContext(MyContext)
+    const {theme, setTheme, putNotifyPopUp} = useContext(MyContext)
 
     // Updates all fields when they change
     const getName = (event) => {
@@ -129,10 +129,10 @@ function Register() {
         .then((response) => response.json())
         .then((result) => {
             if(!result.errors){
-                alert("Usuario creado correctamente.")
+                putNotifyPopUp("Usuario creado correctamente.")
                 navigate('/login')
             }else{
-                alert("Este correo ya está registrado.")
+                putNotifyPopUp("Este correo ya está registrado.")
             }
         });  
     };

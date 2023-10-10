@@ -11,7 +11,7 @@ function Login() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const {theme, setCurrentUser, setCurrentHabits, setCurrentTasks} = useContext(MyContext)
+    const {theme, setCurrentUser, setCurrentHabits, setCurrentTasks, putNotifyPopUp} = useContext(MyContext)
 
     useEffect(()=>{
         moveHeaderUp()
@@ -65,7 +65,7 @@ function Login() {
                 getTasks(access).then((tasks) => {setCurrentTasks(tasks)})
                 navigate("/main");
             }else{
-                alert("Usuario o contraseña incorrectos.")
+                putNotifyPopUp("Usuario o contraseña incorrectos.")
             }
         });  
     };

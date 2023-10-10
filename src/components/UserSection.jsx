@@ -15,6 +15,9 @@ function UserSection({user}) {
     const navigate = useNavigate();
 
     const logout = () => {
+        if (!confirm("¿Desea cerrar sesión?")) {
+            return
+        }
         deleteLocalStorage();
         setCurrentUser({})
         setCurrentTasks([])

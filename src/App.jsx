@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import MyContext from './context.js';
 
 import Header from "./components/Header.jsx"
+import NotifyPopUp from './components/NotifyPopUp.jsx';
 import UserEdit from './pages/userEdit.jsx';
 import FirstPage from './pages/firstPage.jsx';
 import Register from './pages/register.jsx';
@@ -14,13 +15,19 @@ import EditTask from './pages/editTask.jsx';
 import EditHabit from './pages/editHabit.jsx';
 
 import corner from "./assets/images/corner.png";
-import { changeBodyColor, loggedInUser, getUserInfo, accessToken, getHabits, getTasks } from './assets/functions.js';
+import { changeBodyColor, loggedInUser, getUserInfo, accessToken, getHabits, getTasks, togglePopUp} from './assets/functions.js';
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") !== null ? localStorage.getItem("theme") : 'light');
   const [currentUser, setCurrentUser] = useState({});
   const [currentHabits, setCurrentHabits] = useState([]);
   const [currentTasks, setCurrentTasks] = useState([]);
+  const [notifyMessage, setNotifyMessage] = useState("");
+
+  const putNotifyPopUp = (message)=> {
+    setNotifyMessage(message)
+    togglePopUp(false)
+  }
 
   useEffect(()=>{
     changeBodyColor(theme)
@@ -41,9 +48,10 @@ function App() {
   }, [currentUser])
 
   return (
-    <MyContext.Provider value={{ theme, setTheme, currentUser, setCurrentUser , currentHabits, setCurrentHabits, currentTasks, setCurrentTasks}}>
+    <MyContext.Provider value={{ theme, setTheme, currentUser, setCurrentUser , currentHabits, setCurrentHabits, currentTasks, setCurrentTasks, putNotifyPopUp}}>
       <Router>
         <Header/>
+        <NotifyPopUp message={notifyMessage}/>
         <img src={corner} className = "corner left"/>
         <img src={corner} className = "corner right"/>
         <Routes>

@@ -8,7 +8,7 @@ import goBackIcon from "../assets/icons/goBackIcon.png";
 import { moveHeaderUp, accessToken } from "../assets/functions.js";
 
 function EditTask() {
-    const {theme, currentTasks, setCurrentTasks} = useContext(MyContext);
+    const {theme, currentTasks, setCurrentTasks, putNotifyPopUp} = useContext(MyContext);
     const navigate = useNavigate();
     const { slug } = useParams();
 
@@ -100,7 +100,7 @@ function EditTask() {
         .then((response) => response.json())
         .then((result) => {
             if(!result.errors){
-                alert("Tarea actualizada correctamente.")
+                putNotifyPopUp("Tarea actualizada correctamente.")
                 var deepCopyList = JSON.parse(JSON.stringify(currentTasks));
                 const indexToUpdate = deepCopyList.findIndex(item => item._id === slug);
                 deepCopyList[indexToUpdate].name = name;

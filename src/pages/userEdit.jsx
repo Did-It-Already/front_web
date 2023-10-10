@@ -10,7 +10,7 @@ import goBackIcon from "../assets/icons/goBackIcon.png";
 import { moveHeaderUp, deleteLocalStorage, accessToken } from "../assets/functions.js";
 
 function UserEdit() {
-    const {theme, setTheme, currentUser,setCurrentUser, setCurrentTasks, setCurrentHabits} = useContext(MyContext);
+    const {theme, setTheme, currentUser,setCurrentUser, setCurrentTasks, setCurrentHabits, putNotifyPopUp} = useContext(MyContext);
     const navigate = useNavigate();
 
     const [profilePicture, setProfilePicture] = useState("");
@@ -128,7 +128,7 @@ function UserEdit() {
             if(!result.errors){
                 setCurrentUser(result.data.updateUser)
                 localStorage.setItem('theme', theme)
-                alert("Sus datos fueron actualizados correctamente.")
+                putNotifyPopUp("Sus datos fueron actualizados correctamente.")
                 navigate("/main")
             }
         });
@@ -136,6 +136,10 @@ function UserEdit() {
 
     // Sends the received information to the server
     const handleDelete = (e) => {
+        if (!confirm("¿Desea eliminar su cuenta? Esta acción es irreversible.")) {
+            return
+        }
+
         const mutation = `
         mutation {
             deleteUser{
@@ -156,7 +160,7 @@ function UserEdit() {
         .then((response) => response.json())
         .then((result) => {
             if(!result.errors){
-                alert("Su cuenta ha sido eliminada.")
+                putNotifyPopUp("Su cuenta ha sido eliminada.")
                 logout()
             }
         }); 

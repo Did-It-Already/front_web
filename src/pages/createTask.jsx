@@ -5,10 +5,10 @@ import MyContext from '../context.js';
 
 import goBackIcon from "../assets/icons/goBackIcon.png";
 
-import { moveHeaderUp, accessToken } from "../assets/functions.js";
+import { moveHeaderUp, accessToken, getTasks } from "../assets/functions.js";
 
 function CreateTask() {
-    const {theme} = useContext(MyContext);
+    const {theme, putNotifyPopUp,setCurrentTasks} = useContext(MyContext);
     const navigate = useNavigate();
 
     const [name, setName] = useState("");
@@ -60,8 +60,13 @@ function CreateTask() {
         .then((response) => response.json())
         .then((result) => {
             if(!result.errors){
-                alert("Tarea creada correctamente.")
-                window.location.reload()
+                putNotifyPopUp("Tarea creada correctamente.")
+                setTimeout(function() {
+                    getTasks(accessToken()).then((tasks) => {
+                        setCurrentTasks(tasks)
+                        navigate("/main")
+                    });
+                }, 1500);             
             }
         });
     };
