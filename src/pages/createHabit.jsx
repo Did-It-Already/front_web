@@ -7,6 +7,8 @@ import goBackIcon from "../assets/icons/goBackIcon.png";
 
 import { moveHeaderUp, accessToken, getHabits } from "../assets/functions.js";
 
+import { API } from "../assets/constants.js";
+
 function CreateHabit() {
     const {theme,putNotifyPopUp, setCurrentHabits} = useContext(MyContext);
     const navigate = useNavigate();
@@ -51,7 +53,7 @@ function CreateHabit() {
           }
         `;
 
-        fetch('http://127.0.0.1:5000/graphql', {
+        fetch(API, {
             method: 'POST',
             mode: "cors",
             headers: {

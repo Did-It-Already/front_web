@@ -6,6 +6,7 @@ import MyContext from '../context.js';
 import goBackIcon from "../assets/icons/goBackIcon.png";
 
 import { moveHeaderUp, accessToken, getTasks } from "../assets/functions.js";
+import { API } from "../assets/constants.js";
 
 function CreateTask() {
     const {theme, putNotifyPopUp,setCurrentTasks} = useContext(MyContext);
@@ -48,7 +49,7 @@ function CreateTask() {
           }
         `;
 
-        fetch('http://127.0.0.1:5000/graphql', {
+        fetch(API, {
             method: 'POST',
             mode: "cors",
             headers: {

@@ -6,6 +6,7 @@ import MyContext from '../context.js';
 import goBackIcon from "../assets/icons/goBackIcon.png";
 
 import { moveHeaderUp, accessToken } from "../assets/functions.js";
+import { API } from "../assets/constants.js";
 
 function EditHabit() {
     const {theme, currentHabits, setCurrentHabits, putNotifyPopUp} = useContext(MyContext);
@@ -31,7 +32,7 @@ function EditHabit() {
             }
           }
         `;
-        fetch('http://127.0.0.1:5000/graphql', {
+        fetch(API, {
             method: 'POST',
             mode: "cors",
             headers: {
@@ -91,7 +92,7 @@ function EditHabit() {
           }
         `;
 
-        fetch('http://127.0.0.1:5000/graphql', {
+        fetch(API, {
             method: 'POST',
             mode: "cors",
             headers: {

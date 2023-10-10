@@ -7,6 +7,7 @@ import closeIcon from "../assets/icons/closeIcon.png";
 import uploadIcon from "../assets/icons/uploadIcon.png";
 
 import { moveHeaderUp } from "../assets/functions.js";
+import { API } from "../assets/constants.js";
 
 function Register() {
 
@@ -118,7 +119,7 @@ function Register() {
             }
         `;
 
-        fetch('http://127.0.0.1:5000/graphql', {
+        fetch(API, {
             method: 'POST',
             mode: "cors",
             headers: {

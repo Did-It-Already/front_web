@@ -4,6 +4,7 @@ import { NavLink , useNavigate} from "react-router-dom";
 import MyContext from '../context.js';
 
 import { moveHeaderUp, getUserInfo, getHabits, getTasks} from "../assets/functions.js";
+import { API } from "../assets/constants.js";
 
 function Login() {
 
@@ -42,7 +43,7 @@ function Login() {
             }
         `;
 
-        fetch('http://127.0.0.1:5000/graphql', {
+        fetch(API, {
             method: 'POST',
             mode: "cors",
             headers: {

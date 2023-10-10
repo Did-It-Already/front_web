@@ -1,3 +1,5 @@
+import { API } from "./constants";
+
 export const deleteLocalStorage = () => {
     localStorage.removeItem('access');
     localStorage.removeItem('refresh');
@@ -41,7 +43,7 @@ export async function getUserInfo(token) {
   `;
 
   try {
-    const response = await fetch('http://127.0.0.1:5000/graphql/', {
+    const response = await fetch(API, {
       method: 'POST',
       mode: "cors",
       headers: {
@@ -82,7 +84,7 @@ export async function getHabits(token) {
   `;
 
   try {
-    const response = await fetch('http://127.0.0.1:5000/graphql/', {
+    const response = await fetch(API, {
       method: 'POST',
       mode: "cors",
       headers: {
@@ -123,7 +125,7 @@ export async function getTasks(token) {
   `;
 
   try {
-    const response = await fetch('http://127.0.0.1:5000/graphql/', {
+    const response = await fetch(API, {
       method: 'POST',
       mode: "cors",
       headers: {

@@ -8,6 +8,7 @@ import uploadIcon from "../assets/icons/uploadIcon.png";
 import goBackIcon from "../assets/icons/goBackIcon.png";
 
 import { moveHeaderUp, deleteLocalStorage, accessToken } from "../assets/functions.js";
+import { API } from "../assets/constants.js";
 
 function UserEdit() {
     const {theme, setTheme, currentUser,setCurrentUser, setCurrentTasks, setCurrentHabits, putNotifyPopUp} = useContext(MyContext);
@@ -137,7 +138,7 @@ function UserEdit() {
             const finalMutation = mutation
         }
 
-        fetch('http://127.0.0.1:5000/graphql', {
+        fetch(API, {
             method: 'POST',
             mode: "cors",
             headers: {
@@ -171,7 +172,7 @@ function UserEdit() {
           }
         `;
 
-        fetch('http://127.0.0.1:5000/graphql', {
+        fetch(API, {
             method: 'POST',
             mode: "cors",
             headers: {

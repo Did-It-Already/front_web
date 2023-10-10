@@ -10,6 +10,7 @@ import deleteIconDark from "../assets/icons/deleteIconDark.png";
 import MyContext from '../context.js';
 
 import { accessToken } from "../assets/functions";
+import { API } from "../assets/constants";
 
 function TaskCard({task, isHabit}) {
   const {setCurrentHabits, currentHabits, setCurrentTasks, currentTasks} = useContext(MyContext);
@@ -42,7 +43,7 @@ function TaskCard({task, isHabit}) {
       }
       `;
 
-      fetch('http://127.0.0.1:5000/graphql', {
+      fetch(API, {
           method: 'POST',
           mode: "cors",
           headers: {
@@ -78,7 +79,7 @@ function TaskCard({task, isHabit}) {
       }
     `;
 
-    fetch('http://127.0.0.1:5000/graphql', {
+    fetch(API, {
         method: 'POST',
         mode: "cors",
         headers: {
@@ -109,7 +110,7 @@ function TaskCard({task, isHabit}) {
       }
     `;
 
-    fetch('http://127.0.0.1:5000/graphql', {
+    fetch(API, {
         method: 'POST',
         mode: "cors",
         headers: {
@@ -136,7 +137,7 @@ function TaskCard({task, isHabit}) {
     }
     `;
 
-    fetch('http://127.0.0.1:5000/graphql', {
+    fetch(API, {
         method: 'POST',
         mode: "cors",
         headers: {
