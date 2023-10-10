@@ -114,6 +114,29 @@ function UserEdit() {
           }
         `;
 
+        const mutation2 = `
+        mutation {
+            updateUser(user:{
+              name: "${name}"
+              last_name: "${lastName}"
+              theme: "${theme}"
+            }){
+              name
+              last_name
+              email
+              theme
+              profile_picture
+            }
+          }
+        `;
+
+        // Si la imagen no cambió, no la mandamos de nuevo
+        if(profilePicture === currentUser.profile_picture){
+            const finalMutation = mutation2
+        }else{
+            const finalMutation = mutation
+        }
+
         fetch('http://127.0.0.1:5000/graphql', {
             method: 'POST',
             mode: "cors",
@@ -121,7 +144,7 @@ function UserEdit() {
                 'Content-Type': 'application/json',
                 "Authorization": "Bearer " + accessToken(),
             },
-            body: JSON.stringify({query: mutation}),
+            body: JSON.stringify({query: finalMutation}),
         })
         .then((response) => response.json())
         .then((result) => {
