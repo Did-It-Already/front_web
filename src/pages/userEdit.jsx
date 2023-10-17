@@ -133,9 +133,9 @@ function UserEdit() {
 
         // Si la imagen no cambió, no la mandamos de nuevo
         if(profilePicture === currentUser.profile_picture){
-            const finalMutation = mutation2
+             var finalMutation = mutation2
         }else{
-            const finalMutation = mutation
+             var finalMutation = mutation
         }
 
         fetch(API, {
