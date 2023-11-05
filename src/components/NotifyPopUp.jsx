@@ -5,7 +5,7 @@ import { togglePopUp } from "../assets/functions";
 function NotifyPopUp({message}) {
 
     return (
-        <div className ="popUpWhole" id = "popUpBackground">
+        <div className ="popUpWhole" id = "popUpBackground" onClick ={()=>togglePopUp(true)}>
             <div className ="popUpCard" id = "popUpId">
                 <p>{message}</p>
                 <div className="doneButton" onClick ={()=>togglePopUp(true)}>
