@@ -49,6 +49,32 @@ function EditHabit() {
                 navigate("/main")
             }
         });
+
+        const mutation = `
+          mutation {
+            getStatistics(habit_id:"${slug}"){
+              date
+            }
+          }
+        `;
+        fetch(API, {
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + accessToken(),
+            },
+            body: JSON.stringify({query: mutation}),
+        })
+        .then((response) => response.json())
+        .then((result) => {
+            if(!result.errors){
+                alert(JSON.stringify(result.data.getStatistics))
+            }else{
+                navigate("/main")
+            }
+        });
+
     }, [])
 
     useEffect(()=>{
