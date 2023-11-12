@@ -179,3 +179,15 @@ export function togglePopUp (remove){
     element2.classList.add("movedDown");
   }
 }
+
+export function togglePopUp2 (remove){
+  var element = document.getElementById("popUpBackground2");
+  var element2 = document.getElementById("popUpId2");
+  if(remove){
+    element.classList.remove('appeared');
+    element2.classList.remove("movedDown");
+  }else{
+    element.classList.add('appeared');
+    element2.classList.add("movedDown");
+  }
+}

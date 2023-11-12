@@ -4,6 +4,7 @@ import MyContext from './context.js';
 
 import Header from "./components/Header.jsx"
 import NotifyPopUp from './components/NotifyPopUp.jsx';
+import MessagePopUp from './components/MessagePopUp.jsx';
 import UserEdit from './pages/userEdit.jsx';
 import FirstPage from './pages/firstPage.jsx';
 import Register from './pages/register.jsx';
@@ -15,7 +16,7 @@ import EditTask from './pages/editTask.jsx';
 import EditHabit from './pages/editHabit.jsx';
 
 import corner from "./assets/images/corner.png";
-import { changeBodyColor, loggedInUser, getUserInfo, accessToken, getHabits, getTasks, togglePopUp} from './assets/functions.js';
+import { changeBodyColor, loggedInUser, getUserInfo, accessToken, getHabits, getTasks, togglePopUp, togglePopUp2} from './assets/functions.js';
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") !== null ? localStorage.getItem("theme") : 'light');
@@ -23,10 +24,16 @@ function App() {
   const [currentHabits, setCurrentHabits] = useState([]);
   const [currentTasks, setCurrentTasks] = useState([]);
   const [notifyMessage, setNotifyMessage] = useState("");
+  const [motivationalMessage, setMotivationalMessage] = useState("");
 
   const putNotifyPopUp = (message)=> {
     setNotifyMessage(message)
     togglePopUp(false)
+  }
+
+  const putMessagePopUp = (message)=> {
+    setMotivationalMessage(message)
+    togglePopUp2(false)
   }
 
   useEffect(()=>{
@@ -44,6 +51,20 @@ function App() {
   useEffect(()=>{
     if(currentUser.name){
       setTheme(currentUser.theme)
+      fetch("http://localhost:3050/notification/", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+      })
+      .then((response) => response.json())
+      .then((result) => {
+          putMessagePopUp(result.notifications.result.message)
+          setTimeout(() => {
+            togglePopUp2(true);
+          }, 5000); 
+      });
     }
   }, [currentUser])
 
@@ -52,6 +73,7 @@ function App() {
       <Router>
         <Header/>
         <NotifyPopUp message={notifyMessage}/>
+        <MessagePopUp message={motivationalMessage}/>
         <img src={corner} className = "corner left"/>
         <img src={corner} className = "corner right"/>
         <Routes>
