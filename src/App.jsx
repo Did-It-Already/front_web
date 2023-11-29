@@ -51,20 +51,10 @@ function App() {
   useEffect(()=>{
     if(currentUser.name){
       setTheme(currentUser.theme)
-      fetch("http://localhost:3050/notification/", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-            "Content-Type": "application/json"
-        },
-      })
-      .then((response) => response.json())
-      .then((result) => {
-          putMessagePopUp(result.notifications.result.message)
-          setTimeout(() => {
-            togglePopUp2(true);
-          }, 5000); 
-      });
+      putMessagePopUp("No dejes para mañana lo que puedes hacer hoy")
+      setTimeout(() => {
+        togglePopUp2(true);
+      }, 5000); 
     }
   }, [currentUser])
 
